@@ -52,7 +52,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const fetchEmployees = async () => {
         setIsLoading(true);
         try {
-            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/employees`);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}api/employees`);
             if (response.status !== 200) {
                 setError("Something went wrong while fetching employees");
                 return;
