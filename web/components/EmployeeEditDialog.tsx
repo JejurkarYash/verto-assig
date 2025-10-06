@@ -65,7 +65,7 @@ const EmployeeEditDialog = ({ employee }: { employee: employeePropsType }) => {
                 <form className="grid gap-4">
                     <div className="grid gap-2">
                         <Label htmlFor="edit-name">Name</Label>
-                        <Input id="edit-name" value={name} onChange={(e: any) => setName(e.target.value)} aria-required />
+                        <Input id="edit-name" value={name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} aria-required />
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="edit-email">Email</Label>
@@ -73,13 +73,13 @@ const EmployeeEditDialog = ({ employee }: { employee: employeePropsType }) => {
                             id="edit-email"
                             type="email"
                             value={email}
-                            onChange={(e: any) => setEmail(e.target.value)}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                             aria-required
                         />
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="edit-role">Role</Label>
-                        <Input id="edit-role" value={position} onChange={(e: any) => setPosition(e.target.value)} aria-required />
+                        <Input id="edit-role" value={position} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPosition(e.target.value)} aria-required />
                     </div>
                     <DialogFooter className="gap-2">
                         <Button type="button" variant="secondary" onClick={() => setOpen(false)}>
