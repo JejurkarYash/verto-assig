@@ -8,5 +8,8 @@ declare global {
 const Prisma = globalThis.prisma ?? new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") globalThis.prisma = Prisma;
+prisma?.$connect().catch((error) => {
+    console.error("database connection error", error)
+})
 
 export default Prisma; 

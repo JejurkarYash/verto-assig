@@ -57,7 +57,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
                 setError("Something went wrong while fetching employees");
                 return;
             }
-            console.log(response.data);
             setEmployees(response.data.data);
             setIsLoading(false);
             setError(undefined);
@@ -76,14 +75,13 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
                 email: employee.email,
                 position: employee.position
             }
-            console.log(data);
-            const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/employees`, data);
+            setEmployees((prev) => prev.map((e) => (e.id === id ? { ...e, ...employee } : e)));
+            const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}api/employees`, data);
             if (response.status !== 200) {
                 setError("Something went wrong while updating employee");
                 return;
             }
-            console.log(response.data);
-            setEmployees((prev) => prev.map((e) => (e.id === id ? { ...e, ...employee } : e)));
+            console.log("data updated succesfully")
             setIsLoading(false);
             setError(undefined);
 
@@ -95,12 +93,13 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const deleteEmployee = async (id: number) => {
         // setIsLoading(true);
         try {
-            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/employees/${id}`);
+            setEmployees((prev) => prev.filter((e) => e.id !== id));
+            const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}api/employees/${id}`);
             if (response.status !== 200) {
                 setError("Something went wrong while deleting employee");
                 return;
             }
-            setEmployees((prev) => prev.filter((e) => e.id !== id));
+
             setIsLoading(false);
             setError(undefined);
 
@@ -112,13 +111,12 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const addEmployee = async (employee: { name: string, email: string, position: string }) => {
         setIsLoading(true);
         try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/employees`, employee);
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}api/employees`, employee);
             if (response.status !== 201) {
                 setError("Something went wrong while adding employee");
                 return;
             }
 
-            console.log(response.data);
             setEmployees((prev) => [...prev, response.data.newEmployee]);
             // Re-fetching employees to ensure data consistency
             setIsLoading(false);

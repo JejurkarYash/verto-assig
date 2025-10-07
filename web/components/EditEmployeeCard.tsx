@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from './ui/card'
 import EmployeeEditDialog from './EmployeeEditDialog'
 import { useAppContext } from '@/store/ContextProvider';
 
 const EditEmployeeCard = () => {
-    const { employees, isLoading, error } = useAppContext();
+    const { employees, isLoading, error, fetchEmployees } = useAppContext();
 
-    
     return (
         <div className=' w-full h-full items-center justify-center   px-8  transition-all duration-200 trasnform  '>
             <div className="space-y-6 mt-10">

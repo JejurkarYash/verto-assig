@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  
 
   // Prevent hydration mismatch
   useEffect(() => {
